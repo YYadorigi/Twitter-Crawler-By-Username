@@ -176,7 +176,7 @@ class TwitterCrawler():
         for idx, link in enumerate(links):
             try:
                 self.download(link, f"{dir}/{idx + 1}.png")
-                print(f"Download from links {idx + 1}/{len(links)}")
+                logger.info(f"[@{username}] Download {idx + 1}/{len(links)}")
             except Exception as e:
                 logger.error(f"Error: {e}")
                 continue
