@@ -47,7 +47,7 @@ class TwitterCrawler():
         
         # Initialize the settings of chrome driver
         chrome_options = Options()
-        chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--headless')
         chrome_options.add_argument("--proxy-server=" + self.settings["proxy_server"])
         self.driver = webdriver.Chrome(executable_path="chromedriver.exe", options=chrome_options)
         logger.info("Chrome driver initialized")
@@ -107,6 +107,7 @@ class TwitterCrawler():
         start_url = base_url + username + '/media'
         logger.info(f"Driver get url: {start_url}")
         self.driver.get(start_url)
+        wdw(self.driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, 'img')))
 
         # Collect the image links
         img_list = []
@@ -119,14 +120,10 @@ class TwitterCrawler():
         # Scroll down to the bottom if allowed
         # At the same time, limit the number of scrolls
         count_scroll = 0
-        while count_scroll < self.settings["scroll_limit"]:
+        while len(end_marks) < 1 or len(continue_marks) > 0 and count_scroll < self.settings["scroll_limit"]:
             # Get the image links
             img_list += [img.get_attribute('src') for img in self.driver.find_elements(By.XPATH, '//img')]
             logger.info(f"[@{username}] Get images at scroll {count_scroll + 1}")
-
-            # Shut up if it has reached the bottom
-            if len(end_marks) > 0 and len(continue_marks) < 1:
-                break
 
             # scroll down
             js = "window.scrollTo(0,document.body.scrollHeight)"
@@ -148,7 +145,6 @@ class TwitterCrawler():
                 img_url = img_url.replace("format=jpg", "format=png")
                 img_url = re.sub(r"(name=\d+x\d+)|(name=\w+)", "name=4096x4096", img_url)
                 filtered_img_list.append(img_url)
-
         return filtered_img_list
 
     def download(self, url: str, dirpath: str):
@@ -190,17 +186,16 @@ class TwitterCrawler():
                 logger.error(f"Error: {e}")
                 continue
             self.sleep("interval_between_download")
-        
-        self.driver.close()
 
 if __name__ == '__main__':
     t = TwitterCrawler()
     begin_time = time.time()    # Start time
+    t.login()
     for username in t.settings["username"]:
-        t.login()
         t.download_users_all_images(username)
         logger.info(f"Username: {username} finish downloading")
         t.sleep("interval_between_user")
+    t.driver.close()
     end_time = time.time()      # End time
     logger.info("Finish downloading all users")
 
