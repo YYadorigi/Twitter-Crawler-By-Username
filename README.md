@@ -4,7 +4,7 @@
 
 *（仅供学习交流用途，请勿传播图片、尝试 ~~[数据删除]~~ 等不适宜行为，违者自负。）*
 
-</br>
+
 
 # 安装
 
@@ -22,7 +22,7 @@ conda create -n <env_name> python=3.8
 pip install -r requirements.txt
 ```
 
-</br>
+
 
 # 配置
 
@@ -90,7 +90,7 @@ pip install -r requirements.txt
 }
 ```
 
-</br>
+
 
 # 文件说明
 
@@ -101,7 +101,7 @@ pip install -r requirements.txt
 - `chromedriver.exe`：Selenium 运行所需的驱动配置。*您不需要移动或是运行它。*
 - `requirements.txt`：虚拟环境的依赖包。
 
-</br>
+
 
 # 使用
 
@@ -113,4 +113,4 @@ pip install -r requirements.txt
 
 3. 终端和日志文件会实时跟进程序的运行情况。用户可打开 `twitter_crawler.log` 以查看详情。
 
-</br>
+
