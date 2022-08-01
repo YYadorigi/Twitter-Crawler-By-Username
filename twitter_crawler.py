@@ -193,9 +193,16 @@ class TwitterCrawler():
 
 if __name__ == '__main__':
     t = TwitterCrawler()
+    begin_time = time.time()    # Start time
     for username in t.settings["username"]:
         t.login()
         t.download_users_all_images(username)
         logger.info(f"Username: {username} finish downloading")
         t.sleep("interval_between_user")
+    end_time = time.time()      # End time
     logger.info("Finish downloading all users")
+
+    # Print the time spent
+    minutes = int((end_time - begin_time) / 60)
+    seconds = int((end_time - begin_time) % 60)
+    logger.info(f"Time spent: {minutes} (m) {seconds} (s)")
