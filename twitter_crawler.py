@@ -121,8 +121,6 @@ class TwitterCrawler():
             img_list += [img.get_attribute('src') for img in self.driver.find_elements(By.XPATH, '//img')]
             logger.info(f"[@{username}] Get images at scroll {count_scroll + 1}")
 
-            print(len(img_list))
-
             # scroll down
             js = "window.scrollTo(0,document.body.scrollHeight)"
             self.driver.execute_script(js)
@@ -131,7 +129,6 @@ class TwitterCrawler():
 
             # Detect the bottom of the page
             bottom_mark += self.driver.find_elements(By.XPATH, '//div[@class="css-1dbjc4n r-o52ifk"]')
-            print(len(bottom_mark))
             
         # Filter the image links
         img_list = list(set(img_list))
