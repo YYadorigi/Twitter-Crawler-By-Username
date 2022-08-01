@@ -4,7 +4,7 @@
 
 *（仅供学习交流用途，请勿传播图片、尝试 ~~[数据删除]~~ 等不适宜行为，违者自负。）*
 
-
+</br>
 
 # 安装
 
@@ -14,7 +14,7 @@
 conda create -n <env_name> python=3.8
 ```
 
-
+</br>
 
 运行以下命令安装依赖：
 
@@ -22,7 +22,7 @@ conda create -n <env_name> python=3.8
 pip install -r requirements.txt
 ```
 
-
+</br>
 
 # 配置
 
@@ -30,13 +30,13 @@ pip install -r requirements.txt
 
 然后依照下述如实填写 `twitter_settings.json` 文件：
 
-
+</br>
 
 - 必须自行填写的项为：
 
   `headers`，`proxies`，`proxy_server`，`login_info`，`username`；
 
-  
+  </br>
 
 - 可以自行修改的项为：`config`
 
@@ -48,7 +48,7 @@ pip install -r requirements.txt
 
   *（警告：**非常**不建议将**后两项**设置得过短，过于频繁的访问存在封IP的风险。）*
 
-  
+  </br>
 
 - 不建议修改的项为：
 
@@ -58,7 +58,7 @@ pip install -r requirements.txt
   
   您可以根据程序的运行实况及自身的实际需求，自行考虑更改此参数。
   
-  
+  </br>
 
 ```
 {
@@ -90,7 +90,7 @@ pip install -r requirements.txt
 }
 ```
 
-
+</br>
 
 # 文件说明
 
@@ -101,7 +101,7 @@ pip install -r requirements.txt
 - `chromedriver.exe`：Selenium 运行所需的驱动配置。*您不需要移动或是运行它。*
 - `requirements.txt`：虚拟环境的依赖包。
 
-
+</br>
 
 # 使用
 
@@ -112,3 +112,5 @@ pip install -r requirements.txt
 2. 运行过程中，程序会自动在本目录下创建 `twitter_images` 目录，并在该目录下对每个用户的 ***@用户名*** 新建一个子目录，以存放该用户主页下的所有媒体图片。
 
 3. 终端和日志文件会实时跟进程序的运行情况。用户可打开 `twitter_crawler.log` 以查看详情。
+
+</br>
