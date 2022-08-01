@@ -76,7 +76,7 @@ pip install -r requirements.txt
     "config": {
         "interval_between_user": 10,
         "interval_between_download": 1,
-        "interval_between_scroll": 1
+        "interval_between_scroll": 2
     },
     "scroll_limit": 200,
     

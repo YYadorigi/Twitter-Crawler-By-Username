@@ -47,7 +47,7 @@ class TwitterCrawler():
         
         # Initialize the settings of chrome driver
         chrome_options = Options()
-        # chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--headless')
         chrome_options.add_argument("--proxy-server=" + self.settings["proxy_server"])
         self.driver = webdriver.Chrome(executable_path="chromedriver.exe", options=chrome_options)
         logger.info("Chrome driver initialized")
@@ -107,23 +107,21 @@ class TwitterCrawler():
         start_url = base_url + username + '/media'
         logger.info(f"Driver get url: {start_url}")
         self.driver.get(start_url)
-        wdw(self.driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, 'img')))
 
         # Collect the image links
         img_list = []
         filtered_img_list = []
 
-        # Determine whether it has reached the bottom of the page
-        end_marks = self.driver.find_elements(By.XPATH, '//div[@class="timeline-end has-items"]')
-        continue_marks = self.driver.find_elements(By.XPATH, '//div[@class="timeline-end has-items has-more-items"]')
-
         # Scroll down to the bottom if allowed
         # At the same time, limit the number of scrolls
         count_scroll = 0
-        while len(end_marks) < 1 or len(continue_marks) > 0 and count_scroll < self.settings["scroll_limit"]:
+        bottom_mark = []
+        while len(bottom_mark) < 1 and count_scroll < self.settings["scroll_limit"]:
             # Get the image links
             img_list += [img.get_attribute('src') for img in self.driver.find_elements(By.XPATH, '//img')]
             logger.info(f"[@{username}] Get images at scroll {count_scroll + 1}")
+
+            print(len(img_list))
 
             # scroll down
             js = "window.scrollTo(0,document.body.scrollHeight)"
@@ -131,10 +129,10 @@ class TwitterCrawler():
             count_scroll += 1
             self.sleep("interval_between_scroll")
 
-            # Check if it has reached the bottom
-            end_marks = self.driver.find_elements(By.XPATH, '//div[@class="stream-end-inner"]')
-            continue_marks = self.driver.find_elements(By.XPATH, '//div[@class="timeline-end has-items has-more-items"]')
-
+            # Detect the bottom of the page
+            bottom_mark += self.driver.find_elements(By.XPATH, '//div[@class="css-1dbjc4n r-o52ifk"]')
+            print(len(bottom_mark))
+            
         # Filter the image links
         img_list = list(set(img_list))
         def is_img_needed(img_url: str) -> bool:
