@@ -1,0 +1,8 @@
+# Local images
+twitter_images
+
+# Local logs
+twitter_crawler.log
+
+#Private settings
+twitter_settings.json

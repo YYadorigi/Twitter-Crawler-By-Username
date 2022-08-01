@@ -1,0 +1,25 @@
+{
+    "headers": {
+        "user-agent": ""
+    },
+    "proxies": {
+        "http": "",
+        "https": ""
+    },
+    "proxy_server": "",
+
+    "config": {
+        "interval_between_user": 60,
+        "interval_between_download": 1,
+        "interval_between_scroll": 1
+    },
+    "scroll_limit": 200,
+
+    "login_info": {
+        "username": "",
+        "password": ""
+    },
+    "username": [
+        ""
+    ]
+}
