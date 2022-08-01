@@ -36,6 +36,8 @@ pip install -r requirements.txt
 
   `headers`，`proxies`，`proxy_server`，`login_info`，`username`；
 
+  *（注：如果您想实现对被标记为 **敏感内容** 的图片的自动爬取，请在 `login_info` 中正确填写用户名和密码的基础上，确保您的账号的 **设置** 中已设定对敏感内容的 **自动展示**。）*
+
   </br>
 
 - 可以自行修改的项为：`config`
@@ -112,5 +114,4 @@ pip install -r requirements.txt
 2. 运行过程中，程序会自动在本目录下创建 `twitter_images` 目录，并在该目录下对每个用户的 ***@用户名*** 新建一个子目录，以存放该用户主页下的所有媒体图片。
 
 3. 终端和日志文件会实时跟进程序的运行情况。用户可打开 `twitter_crawler.log` 以查看详情。
-
 
