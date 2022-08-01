@@ -190,6 +190,8 @@ class TwitterCrawler():
                 logger.error(f"Error: {e}")
                 continue
             self.sleep("interval_between_download")
+        
+        self.driver.close()
 
 if __name__ == '__main__':
     t = TwitterCrawler()

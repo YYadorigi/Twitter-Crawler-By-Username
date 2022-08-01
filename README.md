@@ -74,7 +74,7 @@ pip install -r requirements.txt
     “proxy_server": "你的代理服务器（一般情况下同上）",
     
     "config": {
-        "interval_between_user": 60,
+        "interval_between_user": 10,
         "interval_between_download": 1,
         "interval_between_scroll": 1
     },
