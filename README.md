@@ -34,7 +34,7 @@ pip install -r requirements.txt
 
 - 必须自行填写的项为：
 
-  `headers`，`proxies`，`proxy_server`，`login_info`，`username`；
+  `headers`，`proxies`，`proxy_server`，`login_info`，`user_media_info`；
 
   *（注：如果您想实现对被标记为 **敏感内容** 的图片的自动爬取，请在 `login_info` 中正确填写用户名和密码的基础上，确保您的账号的 **设置** 中已设定对敏感内容的 **自动展示**。）*
 
@@ -44,22 +44,10 @@ pip install -r requirements.txt
 
   `interval_between_user`：每爬取不同用户之间的时间间隔（单位：秒），
 
-  `interval_between_download`：每次下载之间的时间间隔（单位：秒），
-
   `interval_between_scroll`：每次自动翻滚之间的时间间隔（单位：秒）；
 
-  *（警告：**非常**不建议将**后两项**设置得过短，过于频繁的访问存在封IP的风险。）*
+  *（警告：**非常**不建议将**后一项**设置得过短，过于频繁的自动化操作存在不稳定因素。）*
 
-  </br>
-
-- 不建议修改的项为：
-
-  `scroll_limit`：最大翻滚次数限制。
-  
-  由于本程序实现了自动触底检测的方法，次数过大理论上不会影响运行效率，但这也意味着程序将会爬取更长时间线范围内的图片资源；次数过小则意味着程序将只爬取最近一段时间用户分享的图片。
-  
-  您可以根据程序的运行实况及自身的实际需求，自行考虑更改此参数。
-  
   </br>
 
 ```
@@ -68,27 +56,24 @@ pip install -r requirements.txt
         "user-agent": "你所需使用的用户代理"
     },
     "proxies": {
-        "http": "你的http代理",
-        "https": "你的https代理"
+        "http": "你的 http 代理",
+        "https": "你的 https 代理"
     },
     “proxy_server": "你的代理服务器（一般情况下同上）",
     
     "config": {
         "interval_between_user": 10,
-        "interval_between_download": 1,
-        "interval_between_scroll": 2
+        "interval_between_scroll": 1
     },
-    "scroll_limit": 200,
     
     "login_info": {
-    	"username": "你的推特用户名",
-    	"password": "你的推特密码"
+        "username": "你的推特用户名",
+        "password": "你的推特密码"
     },
-    "username": [
-        "用户的@用户名"，
-        "不同用户名之间换行并用逗号隔开"，
-        "最后一行后不加逗号"
-    ]
+    "user_media_info": {
+        "用户的@用户名": 用户的 Media 栏目的推特数（无需精确）,
+        "Twitter": 2441
+    }
 }
 ```
 
@@ -109,7 +94,7 @@ pip install -r requirements.txt
 
 1. 配置好 `twitter_settings.json` 后，直接在虚拟环境下运行 `twiter_crawler.py` 即可。
 
-   *（您所需做的一切就是填好 `username` 列表，然后轻轻敲击，等待程序执行完毕 =））*
+   *（您所需做的一切就是上线看看，然后填好 `user_media_info` 字典，接着轻轻敲击，等待程序执行完毕 =））*
 
 2. 运行过程中，程序会自动在本目录下创建 `twitter_images` 目录，并在该目录下对每个用户的 ***@用户名*** 新建一个子目录，以存放该用户主页下的所有媒体图片。
 

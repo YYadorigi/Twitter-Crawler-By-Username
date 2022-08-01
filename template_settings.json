@@ -10,16 +10,14 @@
 
     "config": {
         "interval_between_user": 10,
-        "interval_between_download": 1,
-        "interval_between_scroll": 2
+        "interval_between_scroll": 1
     },
-    "scroll_limit": 200,
 
     "login_info": {
         "username": "",
         "password": ""
     },
-    "username": [
-        "twitter"
-    ]
+    "user_media_info": {
+        "Twitter": 2441
+    }
 }

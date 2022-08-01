@@ -82,7 +82,7 @@ class TwitterCrawler():
 
         # Wait for the login success
         wdw(d, 10).until(EC.visibility_of_element_located((By.TAG_NAME, 'header')))
-        logger.info("Login success")
+        logger.info("Successfully login")
 
     def sleep(self, sleep_key: str, delta=0):
         """
@@ -112,24 +112,22 @@ class TwitterCrawler():
         img_list = []
         filtered_img_list = []
 
-        # Scroll down to the bottom if allowed
-        # At the same time, limit the number of scrolls
+        # Scroll down to the bottom of the page
         count_scroll = 0
-        bottom_mark = []
-        while len(bottom_mark) < 1 and count_scroll < self.settings["scroll_limit"]:
+        for _ in range(self.settings["user_media_info"][username]):
             # Get the image links
             img_list += [img.get_attribute('src') for img in self.driver.find_elements(By.XPATH, '//img')]
             logger.info(f"[@{username}] Get images at scroll {count_scroll + 1}")
 
             # scroll down
-            js = "window.scrollTo(0,document.body.scrollHeight)"
+            js = f"window.scrollTo(0, document.body.clientHeight * {count_scroll + 1}, behavior='smooth')"
             self.driver.execute_script(js)
             count_scroll += 1
             self.sleep("interval_between_scroll")
 
-            # Detect the bottom of the page
-            bottom_mark += self.driver.find_elements(By.XPATH, '//div[@class="css-1dbjc4n r-o52ifk"]')
-            
+        # Forecast the arrival to the bottom
+        logger.info(f"[@{username}] Reach the bottom of the page")
+
         # Filter the image links
         img_list = list(set(img_list))
         def is_img_needed(img_url: str) -> bool:
@@ -164,7 +162,8 @@ class TwitterCrawler():
         """
         # Save all download links of images of the user
         links = self.get_users_images(username)
-        
+        logger.info(f"[@{username}] Get {len(links)} images")
+
         # Make directory
         dir = pl.Path() / f"twitter_images/{username}"
         if not dir.exists():
@@ -177,16 +176,16 @@ class TwitterCrawler():
         for idx, link in enumerate(links):
             try:
                 self.download(link, f"{dir}/{idx + 1}.png")
+                print(f"Download from links {idx + 1}/{len(links)}")
             except Exception as e:
                 logger.error(f"Error: {e}")
                 continue
-            self.sleep("interval_between_download")
 
 if __name__ == '__main__':
     t = TwitterCrawler()
     begin_time = time.time()    # Start time
     t.login()
-    for username in t.settings["username"]:
+    for username in t.settings["user_media_info"].keys():
         t.download_users_all_images(username)
         logger.info(f"Username: {username} finish downloading")
         t.sleep("interval_between_user")
