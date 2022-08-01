@@ -196,6 +196,6 @@ if __name__ == '__main__':
     for username in t.settings["username"]:
         t.login()
         t.download_users_all_images(username)
-        logger.info(f"Finish downloading {username}")
+        logger.info(f"Username: {username} finish downloading")
         t.sleep("interval_between_user")
     logger.info("Finish downloading all users")
