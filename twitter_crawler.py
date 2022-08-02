@@ -3,6 +3,7 @@ import re
 import time
 import json
 import logging
+import math
 import pathlib as pl
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -197,4 +198,4 @@ if __name__ == '__main__':
     hours = (end_time - begin_time) // 3600
     minutes = ((end_time - begin_time) % 3600) // 60
     seconds = ((end_time - begin_time) % 3600) % 60
-    logger.info(f"Time spent: {hours} hour(s) {minutes} minute(s) {seconds} second(s)")
+    logger.info(f"Time spent: {math.floor(hours)} hour(s) {math.floor(minutes)} minute(s) {math.floor(seconds)} second(s)")
