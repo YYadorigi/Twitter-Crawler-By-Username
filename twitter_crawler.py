@@ -103,7 +103,7 @@ class TwitterCrawler():
         Get all the image downloading links of the user
         
         :param username: username of the user
-        :return:
+        :return: all the image downloading links of the user
         """
         start_url = base_url + username + '/media'
         logger.info(f"Driver get url: {start_url}")
