@@ -132,7 +132,7 @@ class TwitterCrawler():
         # Filter the image links
         img_list = list(set(img_list))
         def is_img_needed(img_url: str) -> bool:
-            return fnmatch(img_url, "*format=jpg&name=*")
+            return fnmatch(img_url, "*format=*&name=*")
         for img_url in img_list[:]:
             if is_img_needed(img_url):
                 # Replace the image url with the real url
