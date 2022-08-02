@@ -194,6 +194,7 @@ if __name__ == '__main__':
     logger.info("Finish downloading all users")
 
     # Print the time spent
-    minutes = int((end_time - begin_time) / 60)
-    seconds = int((end_time - begin_time) % 60)
-    logger.info(f"Time spent: {minutes} (m) {seconds} (s)")
+    hours = (end_time - begin_time) // 3600
+    minutes = ((end_time - begin_time) % 3600) // 60
+    seconds = ((end_time - begin_time) % 3600) % 60
+    logger.info(f"Time spent: {hours} hour(s) {minutes} minute(s) {seconds} second(s)")

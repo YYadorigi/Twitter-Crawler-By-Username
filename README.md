@@ -71,7 +71,8 @@ pip install -r requirements.txt
         "password": "你的推特密码"
     },
     "user_media_info": {
-        "用户的@用户名": 用户的 Media 栏目的推特数（无需精确）,
+        "用户的@用户名": 待爬取的用户的 Media 栏目的推特数
+                        （无需精确，取值可以溢出但不可小于0）,
         "Twitter": 2441
     }
 }
