@@ -9,8 +9,9 @@
     "proxy_server": "",
 
     "config": {
-        "interval_between_user": 10,
-        "interval_between_scroll": 1
+        "interval_between_user": 60,
+        "interval_between_scroll": 2,
+        "interval_between_download": 2
     },
 
     "login_info": {

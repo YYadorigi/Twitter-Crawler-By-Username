@@ -178,6 +178,7 @@ class TwitterCrawler():
             try:
                 self.download(link, f"{dir}/{idx + 1}.png")
                 logger.info(f"[@{username}] Download {idx + 1}/{len(links)}")
+                self.sleep("interval_between_download")
             except Exception as e:
                 logger.error(f"Error: {e}")
                 continue
